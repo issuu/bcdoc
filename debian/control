@@ -1,0 +1,24 @@
+Source: bcdoc
+Maintainer: Mitch Garnaat <mitch@garnaat.com>
+Section: python
+Priority: optional
+Build-Depends: python-setuptools (>= 0.6b3), debhelper (>= 7), python-support (>= 0.8.4)
+Standards-Version: 3.8.4
+
+Package: python-bcdoc
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-six (>= 1.1.0) | python3-six (>= 1.1.0)
+XB-Python-Version: ${python:Versions}
+Provides: ${python:Provides}
+Description: ReST document generation tools for botocore.
+ bcdoc
+ =====
+ .
+ |Build Status|
+ .
+ .
+ Tools to help document botocore-based projects
+ .
+ .. |Build Status| image:: https://travis-ci.org/boto/bcdoc.png?branch=develop
+    :target: https://travis-ci.org/boto/bcdoc
+ .
