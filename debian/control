@@ -7,7 +7,8 @@ Standards-Version: 3.8.4
 
 Package: python-bcdoc
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python-six (>= 1.1.0) | python3-six (>= 1.1.0)
+Depends: ${misc:Depends}, ${python:Depends}, python-six (>= 1.1.0) | python3-six (>= 1.1.0),
+         python-docutils (>= 0.10.0) | python3-docutils (>= 0.10.0)
 XB-Python-Version: ${python:Versions}
 Provides: ${python:Provides}
 Description: ReST document generation tools for botocore.
