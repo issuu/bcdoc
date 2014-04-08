@@ -24,6 +24,7 @@ DOC_EVENTS = {
     'doc-option-example': '.%s.%s.%s',
     'doc-options-end': '.%s.%s',
     'doc-examples': '.%s.%s',
+    'doc-output': '.%s.%s',
     'doc-subitems-start': '.%s.%s',
     'doc-subitem': '.%s.%s.%s',
     'doc-subitems-end': '.%s.%s',
@@ -51,6 +52,13 @@ def generate_events(session, help_command):
                help_command.name, help_command=help_command)
     if help_command.arg_table:
         for arg_name in help_command.arg_table:
+            # An argument can set an '_UNDOCUMENTED' attribute
+            # to True to indicate a parameter that exists
+            # but shouldn't be documented.  This can be used
+            # for backwards compatibility of deprecated arguments.
+            if getattr(help_command.arg_table[arg_name],
+                       '_UNDOCUMENTED', False):
+                continue
             fire_event(session, 'doc-synopsis-option',
                        help_command.event_class,
                        help_command.name, arg_name,
@@ -61,6 +69,9 @@ def generate_events(session, help_command):
                help_command.name, help_command=help_command)
     if help_command.arg_table:
         for arg_name in help_command.arg_table:
+            if getattr(help_command.arg_table[arg_name],
+                       '_UNDOCUMENTED', False):
+                continue
             fire_event(session, 'doc-option', help_command.event_class,
                        help_command.name, arg_name,
                        arg_name=arg_name, help_command=help_command)
@@ -83,4 +94,6 @@ def generate_events(session, help_command):
     fire_event(session, 'doc-subitems-end', help_command.event_class,
                help_command.name, help_command=help_command)
     fire_event(session, 'doc-examples', help_command.event_class,
+               help_command.name, help_command=help_command)
+    fire_event(session, 'doc-output', help_command.event_class,
                help_command.name, help_command=help_command)
